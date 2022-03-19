@@ -1,0 +1,20 @@
+<form [formGroup]="form" (submit)="handleSubmit()">
+	<div class="mb-3">
+		<label for="username" class="inline-block w-full mb-1 text-sm px-2 text-gray-500">Username</label>
+		<app-form-textfield formControlName="username" placeholder="Username"></app-form-textfield>
+		<span
+			class="text-red-500 text-sm italic pl-1 pt-1"
+			*ngIf="form.get('username')?.invalid && form.get('username')?.touched"
+			>* Required</span
+		>
+	</div>
+	<div class="mb-3">
+		<label for="password" class="inline-block w-full mb-1 text-sm px-2 text-gray-500">Password</label>
+		<app-form-textfield type="password" formControlName="password" placeholder="Password"></app-form-textfield>
+		<span class="text-red-500 text-sm italic pl-1 pt-1">* Required</span>
+	</div>
+	<div class="mt-5 text-right space-x-1">
+		<button type="button" class="bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded text-gray-100">Reset</button>
+		<button type="submit" class="bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded text-gray-100">Sign in</button>
+	</div>
+</form>
