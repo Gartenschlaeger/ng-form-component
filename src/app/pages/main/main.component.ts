@@ -17,7 +17,12 @@ export class MainComponent implements OnInit {
 		})
 	}
 
+	handleReset() {
+		this.form.reset()
+	}
+
 	handleSubmit() {
-		console.log('handleSubmit', this.form.valid, this.form.value)
+		this.form.markAllAsTouched()
+		console.debug('handleSubmit', this.form.valid, this.form.value)
 	}
 }

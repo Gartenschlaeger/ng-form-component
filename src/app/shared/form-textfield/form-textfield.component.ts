@@ -18,7 +18,7 @@ export class FormTextfieldComponent implements ControlValueAccessor {
 	constructor(
 		@Self()
 		@Optional()
-		private ngControl: NgControl
+		public ngControl: NgControl
 	) {
 		console.debug('constructor', ngControl)
 		if (this.ngControl) {
@@ -33,12 +33,13 @@ export class FormTextfieldComponent implements ControlValueAccessor {
 	@Input() type: 'text' | 'password' = 'text'
 
 	handleChange() {
-		console.debug('handleChange')
+		console.debug('handleChange', this.ngControl.name)
+		this.value = this.inputElement.nativeElement.value
 		this.onChange(this.inputElement.nativeElement.value)
 	}
 
 	handleBlur(event: FocusEvent) {
-		console.debug('handleBlur', event)
+		console.debug('handleBlur', this.ngControl.name, event)
 		this.onTouched()
 	}
 
@@ -47,22 +48,22 @@ export class FormTextfieldComponent implements ControlValueAccessor {
 	private onTouched() {}
 
 	writeValue(value: any): void {
-		console.debug('writeValue', value)
+		console.debug('writeValue', this.ngControl.name, this.value, value)
 		this.value = value
 	}
 
 	registerOnChange(fn: any): void {
-		console.debug('registerOnChange', fn)
+		console.debug('registerOnChange', this.ngControl.name, fn)
 		this.onChange = fn
 	}
 
 	registerOnTouched(fn: any): void {
-		console.debug('registerOnTouched', fn)
+		console.debug('registerOnTouched', this.ngControl.name, fn)
 		this.onTouched = fn
 	}
 
 	setDisabledState(isDisabled: boolean): void {
-		console.debug('setDisabledState', isDisabled)
+		console.debug('setDisabledState', this.ngControl.name, isDisabled)
 		this.isDisabled = isDisabled
 	}
 }
